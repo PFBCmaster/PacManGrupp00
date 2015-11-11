@@ -33,7 +33,7 @@ using System.Collections;
             lives--;
         kill = true;
             //pacManSpawn(new Vector3(41, 7, 428));
-        Trans(pacMan.gameObject);
+        GetComponent<Rigidbody>().position =new Vector3(41, 7, 428);
 
         if (lives <= 0)
             {
