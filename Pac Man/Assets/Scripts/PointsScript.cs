@@ -3,50 +3,59 @@ using System.Collections;
 
 
 
-    public class PointsScript : SpawnScript
+public class PointsScript : SpawnScript
+{
+
+    int pointsCount;
+    public int lives;
+    public int maxPoints;
+
+    //Metod som man kallar på när PacMan kolliderar med ett object som ger poäng.
+    public void Points(int points)
     {
+        pointsCount += points;
 
-        int pointsCount;
-        public int lives;
-        public int maxPoints;
-
-        //Metod som man kallar på när PacMan kolliderar med ett object som ger poäng.
-        public void Points(int points)
+        if (pointsCount >= maxPoints)
         {
-            pointsCount += points;
-
-            if (pointsCount >= maxPoints)
-            {
-                //pointsScrean
-                //låsupp nästa bana
-            }
-
-            if (pointsCount > 100)
-            {
-                lives++;
-            }
+            //pointsScrean
+            //låsupp nästa bana
         }
 
-        //Metod som man kallar på när PacMan kolliderar med ett object som dödar PacMan.
-        public void Damage()
+        if (pointsCount > 100)
         {
+            lives++;
             lives--;
         kill = true;
-            //pacManSpawn(new Vector3(41, 7, 428));
-        GetComponent<Rigidbody>().position =new Vector3(41, 7, 428);
+        //pacManSpawn(new Vector3(41, 7, 428));
+        GetComponent<Rigidbody>().position = new Vector3(41, 7, 428);
 
         if (lives <= 0)
             {
-                // pointsScrean
+                // pointsScreen
             }
         }
-
-        //Visar stats.
-        void OnGUI()
-        {
-            GUI.Label(new Rect(10, 10, 100, 20), "Points: " + pointsCount.ToString());
-            GUI.Label(new Rect(10, 20, 100, 20), "Lives: " + lives.ToString());
-        }
-
     }
+
+    //Metod som man kallar på när PacMan kolliderar med ett object som dödar PacMan.
+    public void Damage()
+    {
+        lives--;
+    kill = true;
+        //pacManSpawn(new Vector3(41, 7, 428));
+    GetComponent<Rigidbody>().position =new Vector3(41, 7, 428);
+
+    if (lives <= 0)
+        {
+            // pointsScrean
+        }
+    }
+
+    //Visar stats.
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 100, 20), "Points: " + pointsCount.ToString());
+        GUI.Label(new Rect(10, 20, 100, 20), "Lives: " + lives.ToString());
+    }
+
+}
 
