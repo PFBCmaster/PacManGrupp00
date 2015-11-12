@@ -4,23 +4,21 @@ using System.Collections;
 
 public class Ghost : MonoBehaviour {
 
-    private Transform target;
     private GameObject pacMan;
     private NavMeshAgent ghost;
-    private float wanderRange = 200.0f;
+    private float wanderRange = 100.0f;
     private Vector3 startPosition; 
-    private bool roaming = false;  
+    private bool roaming = true;  
     private bool attacking = false;
-    private float distanceToAttack = 100.0f;
-    public float roamingDelayTimer;
-
     void Start () {
 
         startPosition = this.transform.position;
         ghost = GetComponent<NavMeshAgent>();
         pacMan = GameObject.Find("PacMan(Clone)");
-        //InvokeRepeating("Roaming", 1f, 5f);
-        
+        InvokeRepeating("Roaming", 1f, 5f);
+        //Vector3 position = new Vector3(Random.Range(-40f, 140f), 0, Random.Range(-180, 440));
+        //ghost.SetDestination(randomPos);
+        //ghost.updatePosition = false;
 
     }
 	
@@ -29,7 +27,6 @@ public class Ghost : MonoBehaviour {
     {
         Vector3 destination = startPosition + new Vector3(Random.Range(-wanderRange, wanderRange), 0, Random.Range(-wanderRange, wanderRange));
         NewDestination(destination);
-        
     }
 
     public void NewDestination(Vector3 nyPos) // Sänder agenten till en punkt i kordinatsystemet.
@@ -37,18 +34,6 @@ public class Ghost : MonoBehaviour {
         ghost.SetDestination(nyPos);
     }
 
-    void startRoaming()
-    {
-        
-        roamingDelayTimer -= Time.deltaTime;
-        if (roamingDelayTimer <= 0 && !attacking)
-        {
-            Roaming();
-            roamingDelayTimer = 5.0f;
-        }
-    }
-
-  
     void Attack()
     {
         ghost.SetDestination(pacMan.transform.position);
@@ -58,21 +43,27 @@ public class Ghost : MonoBehaviour {
     void Update()
     {
 
-        //startRoaming();
-        float distFromPac = Vector3.Distance(ghost.transform.position, pacMan.transform.position);
+        /* FreeRoam();
 
+         if (ghost.transform.position = 10)
 
-        if (distFromPac <= distanceToAttack)
-        {
-            Attack();
-        }
+     }
 
-        if (distFromPac > distanceToAttack)
-        {
-            startRoaming();
-        }
+    
+     void FreeRoam()
+     {
 
-        
+             Vector3 randomDirection = Random.insideUnitCircle * 100;
+             randomDirection += transform.position;
+             NavMeshHit hit;
+             NavMesh.SamplePosition(randomDirection, out hit, Random.Range(-100f, 100f), 1);
+             Vector3 finalPosition = hit.position;
+             ghost.destination = finalPosition;
+
+     }
+
+    
+     */
 
     }
 }
