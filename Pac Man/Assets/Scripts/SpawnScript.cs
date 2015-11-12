@@ -13,7 +13,6 @@ public class SpawnScript : MonoBehaviour {
     public GameObject ghostI;
     public GameObject ghostB;
     public bool kill;
-    bool paus;
     Vector3[] pillVector;
     Vector3[] ghostVector = new Vector3[4];
     Vector3[] ballPosition = new Vector3[2];
@@ -36,8 +35,6 @@ public class SpawnScript : MonoBehaviour {
         spawnKlyde(ghostVector[2]);
         spawnBlinky(ghostVector[3]);
         kill = false;
-        paus = false;
-        
     }
 
     //Spawnar PacMan
@@ -96,26 +93,6 @@ public class SpawnScript : MonoBehaviour {
         {
             pacManSpawn(new Vector3(35, 9, 440));
             kill = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (paus == false)
-            {
-                Time.timeScale = 0;
-                paus = true;
-            }
-            else
-            {
-                Time.timeScale = 1;
-                paus = false;
-            }
-        }
-
-        if (Input.GetKey(KeyCode.Q) && paus == true)
-        {
-            Time.timeScale = 1;
-            Application.LoadLevel(0);
         }
     }
 
