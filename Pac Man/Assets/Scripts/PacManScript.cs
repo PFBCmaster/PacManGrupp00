@@ -6,6 +6,7 @@ public class PacManScript : PointsScript {
     float speed = 20f;
     bool eat;
     float timer;
+   
 
     void OnCollisionEnter(Collision other)
     {
