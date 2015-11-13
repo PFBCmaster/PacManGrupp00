@@ -94,6 +94,11 @@ public class SpawnScript : MonoBehaviour {
             pacManSpawn(new Vector3(35, 9, 440));
             kill = false;
         }
+
+        if (Input.GetKey(KeyCode.P))
+        {
+            Application.LoadLevel(0);
+        }
     }
 
 }

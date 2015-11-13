@@ -47,9 +47,13 @@ public class PacManScript : PointsScript {
         }
 
         //PackMan kolliderar med en teleport
-        if (other.gameObject.name == "TeleportName")
+        if (other.gameObject.name == "Teleport1")
         {
-            pacManSpawn(new Vector3(0,0,0));
+            transform.position = new Vector3(160,9,285);
+        }
+        if (other.gameObject.name == "Teleport2")
+        {
+            transform.position = new Vector3(-100, 9, 285);
         }
 
 
